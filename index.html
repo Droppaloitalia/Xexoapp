@@ -4,7 +4,7 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>XexoApp — SexyTraffic Finder</title>
-  <meta name="description" content="XexoApp: ricerca veloce di canali e portali adult-friendly per promuovere sexy toys. Unica app, semplice, pronta da consegnare." />
+  <meta name="description" content="XexoApp: ricerca veloce di forum, club, saune e canali adult‑friendly (priorità italiano) per promuovere sexy toys. Unica app, pronta da consegnare." />
   <meta name="robots" content="noindex,nofollow" />
 
   <!-- Favicon inline -->
@@ -13,7 +13,7 @@
 
   <!-- Open Graph / Twitter -->
   <meta property="og:title" content="XexoApp — SexyTraffic Finder">
-  <meta property="og:description" content="Trova in 1 tap forum, club, saune e creator adult-friendly.">
+  <meta property="og:description" content="Trova in 1 tap forum, club, saune, creator e reti ADV adult‑friendly (focus Italia).">
   <meta property="og:type" content="website">
   <meta property="og:image" content="https://droppaloitalia.github.io/Xexoapp/og-xexoapp.png">
   <meta name="twitter:card" content="summary_large_image">
@@ -98,7 +98,7 @@
         <div class="logo-badge">X</div>
         <div>
           <div class="logo-title">XexoApp</div>
-          <div class="sub">Ricerca veloce portali & canali adult-friendly</div>
+          <div class="sub">Ricerca veloce portali & canali adult‑friendly</div>
         </div>
       </div>
       <div class="brand-right">
@@ -113,7 +113,7 @@
         <div class="hero-left">
           <div class="banner">
             <h1>PROMUOVI I TUOI SEXY TOYS IN 1 TAP</h1>
-            <p>Seleziona un preset oppure esplora le categorie qui sotto. Tutto soft-safe, niente contenuti espliciti.</p>
+            <p>Seleziona un preset oppure esplora le categorie qui sotto. Tutto soft‑safe, niente contenuti espliciti.</p>
           </div>
           <div id="presetWrap" class="grid grid-presets"></div>
         </div>
@@ -153,7 +153,7 @@
   </div>
 
   <script>
-    // ======= PRESET (puliti) =======
+    // ======= PRESET =======
     const PRESETS = [
       { name: 'Forum scambisti (Google)', icon: '💬', template: 'https://www.google.com/search?q=forum+scambisti+italia+annunci' },
       { name: 'Reddit (sex toy marketing)', icon: '🧭', template: 'https://www.reddit.com/search/?q=sex+toy+advertising+tips' },
@@ -161,133 +161,9 @@
       { name: 'BDSM Europa (forum/directory)', icon: '🖤', template: 'https://www.google.com/search?q=BDSM+forum+Europa+directory' }
     ];
 
-    // ======= DIRECTORY =======
+    // ======= DIRECTORY (focus IT + saune aggiornate) =======
     const LINKS = [
-      // --- Forum / Community & Naturismo (reali) ---
-      { id:101, nome:'JOYclub (EU swingers)', categoria:'Forum', descr:'Community europea eventi e gruppi', url:'https://www.joyclub.com/', accetta:true, note:'Multi-lingua' },
+      // --- Forum / Community & Naturismo (IT) ---
+      { id:101, nome:'JOYclub (EU swingers)', categoria:'Forum', descr:'Community europea eventi e gruppi', url:'https://www.joyclub.com/', accetta:true, note:'Multi‑lingua' },
       { id:102, nome:'Forum Italia Naturista (A.N.ITA.)', categoria:'Naturismo', descr:'Forum ufficiale A.N.ITA.', url:'https://forum.italianaturista.it/', accetta:true, note:'IT' },
-      { id:103, nome:'iNudisti – Forum', categoria:'Naturismo', descr:'Grande community nudista italiana', url:'https://www.inudisti.it/forum/', accetta:true, note:'IT' },
-      { id:104, nome:'eXtraVillage – Naturismo', categoria:'Naturismo', descr:'Sezione naturismo eXtraVillage', url:'https://forum.extravillage.it/viewforum.php?f=38', accetta:true, note:'IT' },
-
-      // --- BDSM (reali) ---
-      { id:201, nome:'FetLife (BDSM/Fetish)', categoria:'BDSM', descr:'Community mondiale BDSM/Fetish', url:'https://fetlife.com/', accetta:true, note:'Login richiesto' },
-      { id:202, nome:'Gabbia.com', categoria:'BDSM', descr:'Community & risorse BDSM (IT)', url:'https://www.gabbia.com/', accetta:true, note:'IT' },
-
-      // --- Club Privé / Locali scambisti (IT) ---
-      { id:301, nome:'Krystal Club', categoria:'Club Privé', descr:'Locale scambisti', url:'https://www.krystal-club.it/', accetta:true, note:'IT' },
-      { id:302, nome:'ScambistiPerCaso — Club', categoria:'Club Privé', descr:'Sezione club e locali', url:'https://www.scambistipercaso.it/club', accetta:true, note:'IT' },
-      { id:303, nome:'La Villa Club Privé', categoria:'Club Privé', descr:'Locale scambisti', url:'https://lavillaclubprive.it/', accetta:true, note:'IT' },
-      { id:304, nome:'GIÒG — Guida migliori locali', categoria:'Club Privé', descr:'Articolo guida locali scambisti', url:'https://giog.it/locali-per-scambisti-ecco-i-10-migliori-in-italia/', accetta:true, note:'IT' },
-      { id:305, nome:'Flirt Club', categoria:'Club Privé', descr:'Locale scambisti', url:'https://www.flirtclub.it/', accetta:true, note:'IT' },
-      { id:306, nome:'La Maison de L’Amour', categoria:'Club Privé', descr:'Locale scambisti', url:'https://www.lamaisondelamour.com/', accetta:true, note:'IT' },
-      { id:307, nome:'Olimpo Club', categoria:'Club Privé', descr:'Locale scambisti', url:'https://www.olimpoclub.com/', accetta:true, note:'IT' },
-
-      // --- Saune Club (EU) ---
-      { id:401, nome:'Wellcum (AT)', categoria:'Saune Club', descr:'FKK / sauna club, Carinzia (AT)', url:'https://www.wellcum.at/', accetta:true, note:'AT' },
-      // PLACEHOLDER: inserisci qui i link esatti di Klagenfurt / Slovenia / Ungheria appena me li dai:
-      // { id:402, nome:'Sauna Club Klagenfurt', categoria:'Saune Club', descr:'Klagenfurt (AT)', url:'https://<URL-esatto>', accetta:true, note:'AT' },
-      // { id:403, nome:'Sauna Club Slovenia', categoria:'Saune Club', descr:'Slovenia', url:'https://<URL-esatto>', accetta:true, note:'SI' },
-      // { id:404, nome:'Sauna Club Ungheria', categoria:'Saune Club', descr:'Ungheria', url:'https://<URL-esatto>', accetta:true, note:'HU' },
-
-      // --- Marketplace dove è possibile vendere (verifica policy di categoria adult) ---
-      { id:501, nome:'Amazon', categoria:'Marketplace', descr:'Ricerca prodotti / vetrina', url:'https://www.amazon.it/s?k=sex+toy', accetta:true, note:'Policy adult, verificare' },
-      { id:502, nome:'eBay', categoria:'Marketplace', descr:'Ricerca prodotti / vetrina', url:'https://www.ebay.it/sch/i.html?_nkw=sex+toy', accetta:true, note:'Policy adult, verificare' },
-      { id:503, nome:'Etsy', categoria:'Marketplace', descr:'Ricerca artigianale adult', url:'https://www.etsy.com/search?q=sex+toy', accetta:true, note:'Policy adult, verificare' },
-      { id:504, nome:'Wish', categoria:'Marketplace', descr:'Ricerca prodotti', url:'https://www.wish.com/search/sex%20toy', accetta:true, note:'Policy adult, verificare' },
-      { id:505, nome:'Alibaba', categoria:'Marketplace', descr:'Fornitori / B2B', url:'https://www.alibaba.com/trade/search?SearchText=sex+toy', accetta:true, note:'B2B' },
-
-      // --- Influencer / YouTuber – hub (aggiungi profili concreti) ---
-      { id:601, nome:'Ricerca Instagram (sex toy IT)', categoria:'Influencer', descr:'Profili IG brand ambassador', url:'https://www.google.com/search?q=site%3Ainstagram.com+sex+toy+review+italia', accetta:true, note:'Query IG' },
-      { id:602, nome:'Ricerca TikTok (lingerie / sex toy)', categoria:'Influencer', descr:'Profili TikTok rilevanti', url:'https://www.google.com/search?q=site%3Atiktok.com+lingerie+sex+toy+recensione+italiano', accetta:true, note:'Query TikTok' },
-      { id:603, nome:'Ricerca YouTube (sex toy education IT)', categoria:'YouTuber', descr:'Canali educazione/recensioni', url:'https://www.youtube.com/results?search_query=sex+toy+recensione+italiano', accetta:true, note:'YT query' }
-
-      // Per aggiungere profili concreti (IG/TikTok/YT) incolla qui sotto:
-      // { id:610, nome:'@creator_esempio (IG)', categoria:'Influencer', descr:'Lingerie/sex toy collab', url:'https://instagram.com/creator_esempio', accetta:true, note:'IT' },
-      // { id:611, nome:'Creator TikTok Esempio', categoria:'Influencer', descr:'Recensioni e unboxing', url:'https://www.tiktok.com/@creator_esempio', accetta:true, note:'IT' },
-      // { id:612, nome:'Canale YouTube Esempio', categoria:'YouTuber', descr:'Educazione sessuale soft', url:'https://www.youtube.com/@canale_esempio', accetta:true, note:'IT' }
-    ];
-
-    // ======= STATO
-    let currentCat = 'all';
-    let showFavOnly = false;
-    const favKey = 'xexo_favs_v1';
-
-    // ======= UTILITY
-    const $ = sel => document.querySelector(sel);
-    const $all = sel => Array.from(document.querySelectorAll(sel));
-    function applyPreset(tpl){ window.open(tpl, '_blank'); }
-
-    function setCat(el,cat){
-      currentCat = cat;
-      $all('.pill').forEach(p=>p.classList.remove('active'));
-      el.classList.add('active');
-      renderCards();
-    }
-    function getFavs(){ try{ return JSON.parse(localStorage.getItem(favKey)||'[]'); }catch(e){ return []; } }
-    function setFavs(arr){ localStorage.setItem(favKey, JSON.stringify(arr)); }
-    function isFav(id){ return getFavs().includes(id); }
-    function toggleFav(id){
-      const f = new Set(getFavs());
-      f.has(id) ? f.delete(id) : f.add(id);
-      setFavs([...f]); renderCards();
-    }
-    function toggleFavView(btn){
-      showFavOnly = !showFavOnly;
-      btn.textContent = `Solo preferiti: ${showFavOnly? 'ON':'OFF'}`;
-      renderCards();
-    }
-
-    // ======= RENDER
-    function renderPresets(){
-      const wrap = $('#presetWrap'); wrap.innerHTML = '';
-      PRESETS.forEach(p=>{
-        const b = document.createElement('button');
-        b.className = 'btn btn-primary';
-        b.textContent = `${p.icon} ${p.name}`;
-        b.onclick = () => applyPreset(p.template);
-        wrap.appendChild(b);
-      });
-    }
-
-    function renderCards(){
-      const wrap = $('#cards'); wrap.innerHTML = '';
-      let data = LINKS.slice();
-      if(currentCat!=='all') data = data.filter(x=>x.categoria===currentCat);
-      if(showFavOnly){ const f=new Set(getFavs()); data = data.filter(x=>f.has(x.id)); }
-
-      data.forEach(item=>{
-        const card = document.createElement('div');
-        card.className='card';
-        const top = document.createElement('div');
-        top.style.display='flex'; top.style.alignItems='center'; top.style.gap='10px';
-        const h4 = document.createElement('h4'); h4.textContent=item.nome;
-        const badge = document.createElement('span'); badge.className='badge'; badge.textContent=item.categoria;
-        const fav = document.createElement('div'); fav.className='fav'+(isFav(item.id)?' on':''); fav.title='Aggiungi ai preferiti'; fav.innerHTML='★'; fav.onclick=()=>toggleFav(item.id);
-        fav.classList.add('favorito');
-        top.append(h4,badge,fav);
-
-        const meta = document.createElement('div'); meta.className='meta'; meta.textContent = item.descr + (item.note?` • ${item.note}`:'');
-
-        const actions = document.createElement('div'); actions.className='row';
-        const go = document.createElement('a'); go.className='btn btn-primary'; go.target='_blank'; go.rel='noopener'; go.href=item.url; go.textContent='Visita';
-        const info = document.createElement('span'); info.className='hint'; info.textContent = item.accetta? 'Adult-friendly' : 'Limitazioni';
-        actions.append(go, info);
-
-        card.append(top, meta, actions);
-        wrap.appendChild(card);
-      });
-
-      if(!data.length){
-        const empty = document.createElement('div');
-        empty.className='hint';
-        empty.textContent='Nessun risultato per questo filtro.';
-        wrap.appendChild(empty);
-      }
-    }
-
-    // INIT
-    renderPresets();
-    renderCards();
-  </script>
-</body>
-</html>
+      { id:103, nome:'iNudisti – Forum', categoria:'Naturismo', descr:'Grande community nudista italiana', url:'https://www.inudisti.it/forum/', accetta:true, note 
