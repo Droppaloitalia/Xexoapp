@@ -109,39 +109,24 @@
 
     // 2) Directory linkabile (esempi placeholder). Sostituisci con i tuoi link reali.
     const LINKS = [
-  // --- Forum Scambisti ---
-  { id:1, nome:'Scambiami.it', categoria:'Forum', descr:'Community italiana scambisti', url:'https://www.scambiami.it', accetta:true, note:'IT' },
-  { id:2, nome:'ClubScambisti.eu', categoria:'Forum', descr:'Forum europeo per scambisti', url:'https://www.clubscambisti.eu', accetta:true, note:'Multi-lingua' },
-  { id:3, nome:'IncontriScambisti.com', categoria:'Forum', descr:'Annunci e chat per scambisti', url:'https://www.incontriscambisti.com', accetta:true, note:'IT' },
-  { id:4, nome:'EuroScambisti.com', categoria:'Forum', descr:'Scambisti in Europa', url:'https://www.euroscambisti.com', accetta:true, note:'EN' },
-  { id:5, nome:'FemmeSwap Forum', categoria:'Forum', descr:'Forum soft per coppie aperte', url:'https://www.femmeswap.com', accetta:true, note:'EN' },
+   // --- Community / Forum adult & naturismo (reali) ---
+  { id:101, nome:'JOYclub (EU swingers)', categoria:'Forum', descr:'Community europea con eventi e gruppi', url:'https://www.joyclub.com/', accetta:true, note:'Multi-lingua' },
+  { id:102, nome:'FetLife (BDSM/Fetish)', categoria:'Forum', descr:'Community mondiale BDSM/Fetish', url:'https://fetlife.com/', accetta:true, note:'Login richiesto' },
+  { id:103, nome:'Forum Italia Naturista (A.N.ITA.)', categoria:'Forum', descr:'Forum ufficiale A.N.ITA. sul naturismo', url:'https://forum.italianaturista.it/', accetta:true, note:'IT' },
+  { id:104, nome:'iNudisti – Forum', categoria:'Forum', descr:'Grande community nudista italiana', url:'https://www.inudisti.it/forum/', accetta:true, note:'IT' },
+  { id:105, nome:'eXtraVillage – Naturismo', categoria:'Forum', descr:'Sezione naturismo del forum eXtraVillage', url:'https://forum.extravillage.it/viewforum.php?f=38', accetta:true, note:'IT' },
 
-  // --- Forum Naturisti ---
-  { id:6, nome:'NaturismoNaturista.it', categoria:'Forum', descr:'Forum italiano naturismo', url:'https://www.naturismonaturista.it', accetta:true, note:'IT' },
-  { id:7, nome:'International Naturist Forum', categoria:'Forum', descr:'Community naturisti internazionale', url:'https://www.internaturist.org', accetta:true, note:'EN' },
-  { id:8, nome:'FEN Naturism', categoria:'Forum', descr:'Forum europeo naturismo', url:'https://www.fen-naturismo.org', accetta:true, note:'Multi-lingua' },
+  // --- Portali ADV adult-friendly (reali) ---
+  { id:201, nome:'ExoClick', categoria:'Portali ADV', descr:'Rete adv adult/mainstream', url:'https://www.exoclick.com/advertisers/', accetta:true, note:'Self-serve' },
+  { id:202, nome:'JuicyAds', categoria:'Portali ADV', descr:'Banner, native, pop (adult)', url:'https://www.juicyads.com/', accetta:true, note:'Self-serve' },
+  { id:203, nome:'TrafficJunky', categoria:'Portali ADV', descr:'Network collegato a tube premium', url:'https://www.trafficjunky.com/', accetta:true, note:'Self-serve' },
 
-  // --- Forum BDSM / Fetish ---
-  { id:9, nome:'FetLife', categoria:'Forum', descr:'Community mondiale BDSM e fetish', url:'https://www.fetlife.com', accetta:true, note:'EN — Registrazione necessaria' },
-  { id:10, nome:'BDSM Italia', categoria:'Forum', descr:'Forum italiano BDSM e bondage', url:'https://www.bdsmitalia.it', accetta:true, note:'IT' },
-  { id:11, nome:'KinkTalk', categoria:'Forum', descr:'Forum internazionale fetish', url:'https://www.kinkt.com', accetta:true, note:'EN' },
-
-  // --- Blog Soft Erotici ---
-  { id:12, nome:'GQ Italia — Sezione Erotica', categoria:'Blog', descr:'Articoli soft erotici lifestyle', url:'https://www.gqitalia.it/tag/erotica', accetta:true, note:'Soft' },
-  { id:13, nome:'Pink Label Blog', categoria:'Blog', descr:'Recensioni prodotti erotici', url:'https://www.pinklabel.com/blog', accetta:true, note:'EN' },
-  { id:14, nome:'Soft Erotic Stories', categoria:'Blog', descr:'Racconti erotici soft', url:'https://softeroticstories.com', accetta:true, note:'EN' },
-
-  // --- Marketplace Adult-Friendly ---
-  { id:15, nome:'Etsy — Sex Toy Category', categoria:'Marketplace', descr:'Sex toys artigianali su Etsy', url:'https://www.etsy.com/c/health-and-wellness/adult-items/sex-toys', accetta:true, note:'EN' },
-  { id:16, nome:'Lovehoney', categoria:'Marketplace', descr:'E-commerce leader sex toys', url:'https://www.lovehoney.com', accetta:true, note:'Multi-lingua' },
-  { id:17, nome:'PinkCherry', categoria:'Marketplace', descr:'Store canadese/USA adult', url:'https://www.pinkcherry.com', accetta:true, note:'EN' },
-  { id:18, nome:'Amorelie', categoria:'Marketplace', descr:'Store europeo sexy toys', url:'https://www.amorelie.it', accetta:true, note:'IT/DE' },
-
-  // --- Portali ADV / Sponsorship ---
-  { id:19, nome:'TrafficJunky', categoria:'Portali ADV', descr:'Network ADV Pornhub & siti affini', url:'https://www.trafficjunky.com', accetta:true, note:'EN' },
-  { id:20, nome:'JuicyAds', categoria:'Portali ADV', descr:'Banner network adult-friendly', url:'https://www.juicyads.com', accetta:true, note:'EN' },
-  { id:21, nome:'ExoClick', categoria:'Portali ADV', descr:'ADV adult + mainstream', url:'https://www.exoclick.com', accetta:true, note:'Multi-lingua' },
-  { id:22, nome:'AdXpansion', categoria:'Portali ADV', descr:'Native ads e banner adult', url:'https://www.adxpansion.com', accetta:true, note:'EN' }
+  // --- Retail / marketplace affidabili (per benchmark & partnership) ---
+  { id:301, nome:'Lovehoney', categoria:'Marketplace', descr:'Retailer leader internazionale', url:'https://www.lovehoney.com/', accetta:true, note:'EN' },
+  { id:302, nome:'AMORELIE', categoria:'Marketplace', descr:'Shop europeo (DE)', url:'https://www.amorelie.de/', accetta:true, note:'DE' },
+  { id:303, nome:'Adam & Eve', categoria:'Marketplace', descr:'Storico retailer USA', url:'https://www.adameve.com/', accetta:true, note:'EN' },
+  { id:304, nome:'ORION', categoria:'Marketplace', descr:'Retailer tedesco (EU)', url:'https://www.orion.de/', accetta:true, note:'DE' },
+  { id:305, nome:'EIS', categoria:'Marketplace', descr:'Shop tedesco (EU)', url:'https://www.eis.de/', accetta:true, note:'DE' }
 
 
     ];
