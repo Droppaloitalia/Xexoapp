@@ -4,16 +4,16 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>XexoApp — SexyTraffic Finder</title>
-  <meta name="description" content="XexoApp: directory veloce e pratica di forum, club, saune, portali ADV e canali Telegram adult-friendly (focus IT) per partnership e promozioni." />
+  <meta name="description" content="XexoApp: directory rapida di forum, club, saune e portali ADV adult-friendly (focus Italia) per partnership e promozioni di sexy toys." />
   <meta name="robots" content="noindex,nofollow" />
 
   <!-- Favicon inline -->
   <link rel="icon" type="image/svg+xml"
         href='data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="256" height="256"><rect rx="48" ry="48" width="256" height="256" fill="%23ff4d6d"/><text x="50%" y="54%" text-anchor="middle" font-family="Arial, Helvetica, sans-serif" font-weight="800" font-size="120" fill="white">X</text></svg>'>
 
-  <!-- OG/Twitter preview (usa il file og-xexoapp.png caricato in root) -->
+  <!-- OG/Twitter preview -->
   <meta property="og:title" content="XexoApp — SexyTraffic Finder">
-  <meta property="og:description" content="Trova subito forum, club, saune, ADV e Telegram per promuovere il tuo sexyshop.">
+  <meta property="og:description" content="Trova subito forum, club, saune e portali ADV per promuovere il tuo sexyshop.">
   <meta property="og:type" content="website">
   <meta property="og:image" content="https://droppaloitalia.github.io/Xexoapp/og-xexoapp.png">
   <meta name="twitter:card" content="summary_large_image">
@@ -32,6 +32,7 @@
     a{color:inherit;text-decoration:none}
     .container{max-width:1100px;margin:0 auto;padding:20px}
 
+    /* HEADER + MENU */
     header{display:flex;align-items:center;gap:16px;position:sticky;top:0;z-index:20;
       background:linear-gradient(180deg, rgba(13,14,18,.92) 60%, rgba(13,14,18,0));
       backdrop-filter: blur(6px); padding:14px 0 10px}
@@ -47,6 +48,7 @@
     .brand-right{display:flex;align-items:center;margin-left:8px}
     .brand-right img{height:34px; width:auto; border-radius:8px; object-fit:contain; border:1px solid var(--ring); padding:4px}
 
+    /* PANEL & BUTTONS */
     .panel{background:var(--panel);border:1px solid var(--ring);border-radius:var(--radius);box-shadow:var(--shadow)}
     .grid{display:grid;gap:14px}
     .grid-presets{grid-template-columns:repeat(auto-fill,minmax(170px,1fr))}
@@ -59,6 +61,8 @@
     .pill{display:inline-flex;align-items:center;gap:8px;padding:10px 12px;border-radius:999px;background:#1a1d28;border:1px solid var(--ring);cursor:pointer;user-select:none}
     .pill.active{outline:2px solid var(--brand)}
     .sep{height:1px;background:linear-gradient(90deg,transparent,rgba(255,255,255,.08),transparent);margin:8px 0}
+
+    /* HERO */
     .hero{padding:18px}
     .hero-wrap{display:grid;gap:18px;grid-template-columns:1.6fr .9fr}
     @media (max-width:900px){.hero-wrap{grid-template-columns:1fr}}
@@ -72,8 +76,10 @@
     .banner p{margin:0;color:var(--muted)}
     .hero-right{border:1px solid var(--ring);border-radius:16px;overflow:hidden;background:#10121a;display:grid;place-items:center}
     .hero-art{width:100%;height:100%;min-height:160px; background:
-      linear-gradient(180deg, rgba(255,77,109,.15), rgba(255,122,141,.08)),
-      url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 -20 260 340"><defs><linearGradient id="g" x1="0" y1="0" x2="1" y2="1"><stop stop-color="%23ff4d6d" offset="0"/><stop stop-color="%23ff9fb1" offset="1"/></linearGradient></defs><path d="M140 10c22 5 30 28 28 43-2 15-10 27-9 45 1 12 5 26 10 34 7 12 18 19 24 34 7 19 2 39-8 50-9 10-24 15-43 15s-34-5-43-15c-10-11-15-31-8-50 6-15 17-22 24-34 5-8 9-22 10-34 1-18-7-30-9-45-2-15 6-38 28-43z" fill="url(%23g)" fill-opacity=".9"/><circle cx="200" cy="20" r="6" fill="%23ff7a8d"/><circle cx="40" cy="60" r="4" fill="%23ffd1d9"/></svg>') center/70% no-repeat;}
+      linear-gradient(180deg, rgba(255,77,109,.10), rgba(255,122,141,.06)),
+      url('./hero-xexo.jpg') center/cover no-repeat;}
+
+    /* CARDS */
     .card{background:var(--card);border:1px solid var(--ring);border-radius:18px;padding:14px;display:grid;gap:10px}
     .card h4{margin:0;font-size:16px}
     .meta{color:var(--muted);font-size:13px}
@@ -81,8 +87,10 @@
     .favorito{margin-left:auto}
     .fav{width:22px;height:22px;border-radius:8px;border:1px solid var(--ring);display:grid;place-items:center;cursor:pointer}
     .fav.on{background:linear-gradient(135deg,var(--brand),#ff6f8b);color:#0b0e13}
+
     footer{color:var(--muted);font-size:12px;padding:18px 6px 30px}
     .safe{font-size:12px;color:#cfcfe6}
+    @media (max-width:480px){.logo-title{font-size:18px}}
   </style>
 </head>
 <body>
@@ -100,7 +108,6 @@
         <button class="navbtn" onclick="jump('Forum')">Forum</button>
         <button class="navbtn" onclick="jump('Club Privé')">Club Privé</button>
         <button class="navbtn" onclick="jump('Saune Club')">Saune</button>
-        <button class="navbtn" onclick="jump('Telegram')">Telegram</button>
         <button class="navbtn" onclick="jump('Directory')">Directory</button>
       </nav>
       <div class="brand-right">
@@ -115,11 +122,13 @@
         <div class="hero-left">
           <div class="banner">
             <h1>PROMUOVI I TUOI SEXY TOYS IN 1 TAP</h1>
-            <p>Tutto ciò che ti serve per contattare community, club, saune e reti ADV. Soft-safe, niente nudo esplicito.</p>
+            <p>Tutto ciò che serve per contattare community, club, saune e reti ADV. Soft-safe, niente contenuti espliciti.</p>
           </div>
           <div id="presetWrap" class="grid grid-presets"></div>
         </div>
-        <div class="hero-right"><div class="hero-art" aria-hidden="true"></div></div>
+        <div class="hero-right">
+          <div class="hero-art" aria-hidden="true"></div>
+        </div>
       </div>
     </section>
 
@@ -132,7 +141,6 @@
         <div class="pill" data-cat="Forum" onclick="setCat(this,'Forum')">Forum</div>
         <div class="pill" data-cat="Club Privé" onclick="setCat(this,'Club Privé')">Club Privé</div>
         <div class="pill" data-cat="Saune Club" onclick="setCat(this,'Saune Club')">Saune Club</div>
-        <div class="pill" data-cat="Telegram" onclick="setCat(this,'Telegram')">Telegram</div>
         <div class="pill" data-cat="Directory" onclick="setCat(this,'Directory')">Directory</div>
         <div class="pill" data-cat="Blog" onclick="setCat(this,'Blog')">Blog</div>
         <div class="pill" data-cat="Marketplace" onclick="setCat(this,'Marketplace')">Marketplace</div>
@@ -153,18 +161,17 @@
   </div>
 
   <script>
-    // ======= PRESET RAPIDI (per ricerche aggiuntive) =======
+    // ======= PRESET RAPIDI =======
     const PRESETS = [
       { name:'Forum scambisti IT (Google)', icon:'💬', template:'https://www.google.com/search?q=forum+scambisti+italia+annunci' },
       { name:'Club Privé Italia (Google)', icon:'🎫', template:'https://www.google.com/search?q=club+priv%C3%A9+scambisti+italia+eventi' },
       { name:'BDSM Italia (Google)', icon:'🖤', template:'https://www.google.com/search?q=BDSM+forum+Italia' },
-      { name:'Telegram canali IT', icon:'📣', template:'https://tgstat.com/it/search?query=sexy%20toy%20lingerie%20italia' },
       { name:'ADV adult networks', icon:'📈', template:'https://www.google.com/search?q=adult+ad+network+self+serve' }
     ];
 
-    // ======= ELENCO LINK — FOCUS ITALIA/EU, NO E-COM COMPETITOR =======
+    // ======= ELENCO LINK (NO COMPETITOR SHOP) =======
     const LINKS = [
-      // --- PORTALI ADV (ampliati) ---
+      // --- PORTALI ADV (ampliati, include i tuoi nuovi) ---
       { id:11, nome:'ExoClick', categoria:'Portali ADV', descr:'Rete adv adult/mainstream', url:'https://www.exoclick.com/advertisers/', accetta:true, note:'Self-serve' },
       { id:12, nome:'JuicyAds', categoria:'Portali ADV', descr:'Banner, native, pop', url:'https://www.juicyads.com/', accetta:true, note:'Self-serve' },
       { id:13, nome:'TrafficJunky', categoria:'Portali ADV', descr:'Network tube premium', url:'https://www.trafficjunky.com/', accetta:true, note:'Self-serve' },
@@ -174,19 +181,24 @@
       { id:17, nome:'Adsterra (adult friendly)', categoria:'Portali ADV', descr:'Pop/Display/CPA', url:'https://adsterra.com/advertisers/', accetta:true, note:'Verifica policy' },
       { id:18, nome:'TrafficHaus', categoria:'Portali ADV', descr:'DSP/Exchange adult', url:'https://traffichaus.com/', accetta:true, note:'Self-serve' },
 
-      // --- FORUM / COMMUNITY (IT/EU, no shop) ---
+      // --- Portali ADV (richiesti da te) ---
+      { id:31, nome:'SexyGuide International', categoria:'Portali ADV', descr:'Directory/advertising adult', url:'https://sexyguideinternational.com/', accetta:true, note:'Directory/ADV' },
+      { id:32, nome:'Escort Advisor', categoria:'Portali ADV', descr:'Directory con spazi pubblicitari', url:'https://www.escort-advisor.com/', accetta:true, note:'ADV available' },
+      { id:33, nome:'Pablito Escort', categoria:'Portali ADV', descr:'Annunci/ADV', url:'https://pablitoescort.com/', accetta:true, note:'ADV available' },
+      { id:34, nome:'Piccole Trasgressioni', categoria:'Portali ADV', descr:'Annunci/ADV', url:'https://www.piccoletrasgressioni.it/', accetta:true, note:'ADV available' },
+      { id:35, nome:'OnlyFans (promo / collab)', categoria:'Portali ADV', descr:'Collaborazioni con creator', url:'https://onlyfans.com/', accetta:true, note:'Collab creator' },
+
+      // --- FORUM / COMMUNITY (IT/EU, no shop; rimossi i link rotti) ---
       { id:101, nome:'JOYclub (EU swingers)', categoria:'Forum', descr:'Community EU eventi e gruppi', url:'https://www.joyclub.com/', accetta:true, note:'Multi-lingua' },
       { id:102, nome:'Forum Italia Naturista (A.N.ITA.)', categoria:'Forum', descr:'Forum ufficiale A.N.ITA.', url:'https://forum.italianaturista.it/', accetta:true, note:'IT' },
-      { id:103, nome:'iNudisti – Forum', categoria:'Forum', descr:'Grande community nudista', url:'https://www.inudisti.it/forum/', accetta:true, note:'IT' },
+      { id:103, nome:'iNudisti – Forum', categoria:'Forum', descr:'Grande community naturista', url:'https://www.inudisti.it/forum/', accetta:true, note:'IT' },
       { id:104, nome:'eXtraVillage – Naturismo', categoria:'Forum', descr:'Sezione naturismo', url:'https://forum.extravillage.it/viewforum.php?f=38', accetta:true, note:'IT' },
-      { id:105, nome:'Crociera Scambista (community)', categoria:'Forum', descr:'Community/annunci eventi soft', url:'https://www.crocierascambista.it', accetta:true, note:'IT' },
 
       // --- BDSM (community/risorse, no shop) ---
       { id:201, nome:'FetLife', categoria:'BDSM', descr:'Community mondiale (login)', url:'https://fetlife.com/', accetta:true, note:'EN' },
       { id:202, nome:'Gabbia.com', categoria:'BDSM', descr:'Community & risorse IT', url:'https://www.gabbia.com/', accetta:true, note:'IT' },
-      { id:203, nome:'LaStanzaRossa (community)', categoria:'BDSM', descr:'Community italiana soft', url:'https://lastanzarossa.it', accetta:true, note:'IT' },
 
-      // --- CLUB PRIVÉ IT (locali & guide — no shop) ---
+      // --- CLUB PRIVÉ IT ---
       { id:301, nome:'Krystal Club', categoria:'Club Privé', descr:'Locale scambisti', url:'https://www.krystal-club.it/', accetta:true, note:'IT' },
       { id:302, nome:'ScambistiPerCaso — Club', categoria:'Club Privé', descr:'Elenco club/locali', url:'https://www.scambistipercaso.it/club', accetta:true, note:'IT' },
       { id:303, nome:'La Villa Club Privé', categoria:'Club Privé', descr:'Locale scambisti', url:'https://lavillaclubprive.it/', accetta:true, note:'IT' },
@@ -194,8 +206,6 @@
       { id:305, nome:'Flirt Club', categoria:'Club Privé', descr:'Locale scambisti', url:'https://www.flirtclub.it/', accetta:true, note:'IT' },
       { id:306, nome:'La Maison de L’Amour', categoria:'Club Privé', descr:'Locale scambisti', url:'https://www.lamaisondelamour.com/', accetta:true, note:'IT' },
       { id:307, nome:'Olimpo Club', categoria:'Club Privé', descr:'Locale scambisti', url:'https://www.olimpoclub.com/', accetta:true, note:'IT' },
-      { id:308, nome:'Club Privé Sicilia (guida)', categoria:'Club Privé', descr:'Elenco locali regione', url:'https://www.siciliafan.it/club-prive-sicilia/', accetta:true, note:'IT' },
-      { id:309, nome:'Lazio — locali scambisti (guida)', categoria:'Club Privé', descr:'Articolo elenco locali', url:'https://www.romatoday.it/social/locali-per-scambisti-roma-lazio.html', accetta:true, note:'IT' },
 
       // --- SAUNE CLUB (AT/SI) ---
       { id:401, nome:'Wellcum (AT) — IT', categoria:'Saune Club', descr:'FKK / sauna club, Carinzia', url:'https://wellcum.at/it/', accetta:true, note:'AT' },
@@ -204,32 +214,22 @@
       { id:404, nome:'Atlantis (AT)', categoria:'Saune Club', descr:'Sauna club', url:'https://www.saunaclub-atlantis.at', accetta:true, note:'AT' },
       { id:405, nome:'Margerita (SI)', categoria:'Saune Club', descr:'Sauna club', url:'https://margerita.si', accetta:true, note:'SI' },
 
-      // --- TELEGRAM (motori ricerca + marketplace promo) ---
-      { id:501, nome:'TGStat — IT search', categoria:'Telegram', descr:'Motore ricerca canali/gruppi IT', url:'https://tgstat.com/it/search?query=sexy%20toy%20lingerie%20italia', accetta:true, note:'Ricerca' },
-      { id:502, nome:'Telemetr.io — IT search', categoria:'Telegram', descr:'Analytics & ricerca', url:'https://telemetr.io/it/search?search=sex%20toy%20italia', accetta:true, note:'Ricerca' },
-      { id:503, nome:'Telega.io — Marketplace', categoria:'Telegram', descr:'Compra promo canali TG', url:'https://telega.io/it', accetta:true, note:'Marketplace' },
-      { id:504, nome:'Telega.io — Filtro Italia', categoria:'Telegram', descr:'Filtra canali IT', url:'https://telega.io/it/channels?country=IT', accetta:true, note:'Filtro IT' },
-      { id:505, nome:'Combot — Directory', categoria:'Telegram', descr:'Directory gruppi/canali', url:'https://combot.org/telegram/top/groups?language=italian', accetta:true, note:'Ricerca' },
-      { id:506, nome:'Tlgrm.eu — Directory', categoria:'Telegram', descr:'Directory canali (IT)', url:'https://tlgrm.eu/channels?country=IT', accetta:true, note:'Ricerca' },
-
-      // --- DIRECTORY / LISTONI (per outreach veloce) ---
-      { id:601, nome:'XGuide (club directory)', categoria:'Directory', descr:'Elenco club/eventi EU', url:'https://xguide.net/', accetta:true, note:'EN' },
-      { id:602, nome:'Joyclub — Club & Eventi', categoria:'Directory', descr:'Sezione club Joyclub', url:'https://www.joyclub.com/magazine/en/club', accetta:true, note:'EU' },
-      { id:603, nome:'Eventi swingers Italia (search)', categoria:'Directory', descr:'Ricerca eventi/party IT', url:'https://www.google.com/search?q=eventi+swingers+italia+calendar', accetta:true, note:'Ricerca' },
-      { id:604, nome:'Calendario naturista Italia', categoria:'Directory', descr:'Associazioni/eventi', url:'https://www.google.com/search?q=calendario+naturista+italia', accetta:true, note:'Ricerca' },
+      // --- DIRECTORY (listoni utili, rimossi link rotti) ---
+      { id:601, nome:'Joyclub — Club & Eventi (EU)', categoria:'Directory', descr:'Sezione club Joyclub', url:'https://www.joyclub.com/magazine/en/club', accetta:true, note:'EU' },
+      { id:602, nome:'Eventi swingers Italia (Google)', categoria:'Directory', descr:'Ricerca eventi/party IT', url:'https://www.google.com/search?q=eventi+swingers+italia+calendar', accetta:true, note:'Ricerca' },
 
       // --- BLOG / MEDIA soft (no e-commerce) ---
       { id:701, nome:'Rolling Stone — sesso (IT)', categoria:'Blog', descr:'Sezione cultura/soft', url:'https://www.rollingstone.it/tag/sesso/', accetta:true, note:'IT' },
       { id:702, nome:'Wired — scienza/sessualità', categoria:'Blog', descr:'Contenuti informativi soft', url:'https://www.wired.it/search/?q=sesso', accetta:true, note:'IT' },
 
-      // --- MARKETPLACE (dove valutare vetrina — verifica policy) ---
+      // --- MARKETPLACE (vetrina — verifica policy) ---
       { id:801, nome:'Amazon', categoria:'Marketplace', descr:'Ricerca prodotti / vetrina', url:'https://www.amazon.it/s?k=sex+toy', accetta:true, note:'Policy adult' },
       { id:802, nome:'eBay', categoria:'Marketplace', descr:'Ricerca prodotti / vetrina', url:'https://www.ebay.it/sch/i.html?_nkw=sex+toy', accetta:true, note:'Policy adult' },
       { id:803, nome:'Etsy', categoria:'Marketplace', descr:'Artigianale adult', url:'https://www.etsy.com/search?q=sex+toy', accetta:true, note:'Policy adult' },
       { id:804, nome:'Wish', categoria:'Marketplace', descr:'Ricerca prodotti', url:'https://www.wish.com/search/sex%20toy', accetta:true, note:'Policy adult' },
       { id:805, nome:'Alibaba (B2B)', categoria:'Marketplace', descr:'Fornitori / B2B', url:'https://www.alibaba.com/trade/search?SearchText=sex+toy', accetta:true, note:'B2B' },
 
-      // --- INFLUENCER / YOUTUBER (hub ricerche IT) ---
+      // --- INFLUENCER / YT — HUB RICERCHE (poi aggiungi profili IT reali) ---
       { id:901, nome:'Instagram — sex toy IT', categoria:'Influencer', descr:'Cerca creator italiani', url:'https://www.google.com/search?q=site%3Ainstagram.com+sex+toy+review+italia', accetta:true, note:'Ricerca' },
       { id:902, nome:'TikTok — lingerie/sex toy IT', categoria:'Influencer', descr:'Cerca creator italiani', url:'https://www.google.com/search?q=site%3Atiktok.com+lingerie+sex+toy+recensione+italiano', accetta:true, note:'Ricerca' },
       { id:903, nome:'YouTube — sex toy IT', categoria:'YouTuber', descr:'Cerca canali/review IT', url:'https://www.youtube.com/results?search_query=sex+toy+recensione+italiano', accetta:true, note:'Ricerca' }
