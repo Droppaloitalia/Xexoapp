@@ -1,27 +1,437 @@
-const CACHE = "xexoapp-v5"; // bump per forzare refresh
-";
-const ASSETS = [
-  "./",
-  "./index.html",
-  "./manifest.json",
-  "./xexo-logo.png",
-  "./header-banner.jpg"
-];
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>XexoApp — SexyTraffic Finder</title>
+  <meta name="description" content="XexoApp: directory rapida di forum, club, saune e portali ADV adult-friendly (focus Italia) per partnership e promozioni di sexy toys." />
+  <meta name="robots" content="noindex,nofollow" />
 
-self.addEventListener("install", e => {
-  e.waitUntil(caches.open(CACHE).then(c => c.addAll(ASSETS)));
-});
+  <!-- PWA base -->
+  <link rel="manifest" href="./manifest.json">
+  <meta name="theme-color" content="#ff4d6d">
 
-self.addEventListener("activate", e => {
-  e.waitUntil(
-    caches.keys().then(keys =>
-      Promise.all(keys.filter(k => k !== CACHE).map(k => caches.delete(k)))
-    )
-  );
-});
+  <!-- iOS PWA -->
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <link rel="apple-touch-icon" sizes="180x180" href="icons/icon-180.png">
 
-self.addEventListener("fetch", e => {
-  e.respondWith(
-    caches.match(e.request).then(r => r || fetch(e.request))
-  );
-});
+  <!-- Favicon inline -->
+  <link rel="icon" type="image/svg+xml"
+        href='data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="256" height="256"><rect rx="48" ry="48" width="256" height="256" fill="%23ff4d6d"/><text x="50%" y="54%" text-anchor="middle" font-family="Arial, Helvetica, sans-serif" font-weight="800" font-size="120" fill="white">X</text></svg>'>
+
+  <!-- OG/Twitter preview -->
+  <meta property="og:title" content="XexoApp — SexyTraffic Finder">
+  <meta property="og:description" content="Trova subito forum, club, saune e portali ADV per promuovere il tuo sexyshop.">
+  <meta property="og:type" content="website">
+  <meta property="og:image" content="https://droppaloitalia.github.io/Xexoapp/header-banner.jpg">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:image" content="https://droppaloitalia.github.io/Xexoapp/header-banner.jpg">
+
+  <style>
+    :root{
+      --bg:#0d0e12; --panel:#14161d; --card:#171923;
+      --muted:#a7adbb; --text:#f5f7fb;
+      --brand:#ff4d6d; --brand-2:#ff7a8d; --accent:#ffd1d9;
+      --ring:#262936; --radius:18px; --shadow:0 12px 30px rgba(0,0,0,.28);
+      --hero-img:none; --hero-fit:cover;
+    }
+    *{box-sizing:border-box}
+    html,body{margin:0;background:var(--bg);color:var(--text);font:16px/1.45 system-ui,-apple-system,Segoe UI,Roboto,Ubuntu,"Helvetica Neue",Arial}
+    a{color:inherit;text-decoration:none}
+    .container{max-width:1100px;margin:0 auto;padding:20px}
+
+    /* ===== HEADER + MENU (layout robusto) ===== */
+    header{
+      display:grid; align-items:center; column-gap:12px; row-gap:8px;
+      grid-template-columns: auto 1fr auto;   /* logo | nav | brand */
+      position:sticky; top:0; z-index:20;
+      background:linear-gradient(180deg, rgba(13,14,18,.92) 60%, rgba(13,14,18,0));
+      backdrop-filter: blur(6px); padding:14px 0 10px;
+    }
+    .logo{display:flex;align-items:center;gap:10px}
+    .logo-badge{width:40px;height:40px;border-radius:12px;
+      background:linear-gradient(135deg,var(--brand),var(--brand-2));
+      display:grid;place-items:center;box-shadow:var(--shadow);font-weight:800}
+    .logo-title{font-size:22px;font-weight:800;letter-spacing:.3px}
+    .sub{color:var(--muted);font-size:12px}
+
+    /* NAV: SEMPRE orizzontale, scorrevole; se va a capo: allineato a sinistra */
+    #topnav{
+      grid-column:2/3;
+      display:flex; gap:8px;
+      flex-wrap:nowrap;                  /* evita colonna */
+      overflow-x:auto; overflow-y:hidden;
+      -webkit-overflow-scrolling:touch;
+      scrollbar-width:none;
+      max-width:100%;
+      white-space:nowrap;
+      justify-content:flex-start;        /* allinea a sinistra */
+    }
+    #topnav::-webkit-scrollbar{ display:none }
+    .navbtn{
+      display:inline-flex; align-items:center; justify-content:center;
+      flex:0 0 auto; white-space:nowrap;
+      appearance:none; border:1px solid var(--ring); background:#1a1d28; color:#fff;
+      border-radius:999px; padding:8px 12px; cursor:pointer; font-weight:600;
+    }
+    .navbtn:hover{filter:brightness(1.08)}
+
+    .brand-right{
+      grid-column:3/4;
+      display:flex;align-items:center;gap:8px; justify-self:end;
+    }
+    .brand-right img{height:34px;width:auto;border-radius:8px;object-fit:contain;border:1px solid var(--ring);padding:4px}
+
+    /* Su schermi stretti: nav occupa una riga intera sotto il logo, ma resta orizzontale */
+    @media (max-width: 780px){
+      header{
+        grid-template-columns: 1fr auto;   /* logo | brand */
+        grid-auto-rows:auto;
+      }
+      .logo{grid-column:1/2}
+      .brand-right{grid-column:2/3}
+      #topnav{
+        grid-column:1/-1;             /* nav sotto, a tutta larghezza */
+        order:3;
+      }
+    }
+
+    /* ===== PANEL & BUTTONS ===== */
+    .panel{background:var(--panel);border:1px solid var(--ring);border-radius:var(--radius);box-shadow:var(--shadow)}
+    .grid{display:grid;gap:14px}
+    .grid-presets{grid-template-columns:repeat(auto-fill,minmax(170px,1fr))}
+    .grid-cards{grid-template-columns:repeat(auto-fill,minmax(260px,1fr))}
+    .row{display:flex;gap:12px;flex-wrap:wrap}
+    .btn{appearance:none;border:0;border-radius:12px;padding:10px 12px;background:#1d202c;color:#fff;cursor:pointer;font-weight:600}
+    .btn:hover{filter:brightness(1.06)}
+    .btn-primary{background:linear-gradient(135deg,var(--brand),#ff5f7f)}
+    .btn-ghost{background:transparent;border:1px solid var(--ring)}
+    .pill{display:inline-flex;align-items:center;gap:8px;padding:10px 12px;border-radius:999px;background:#1a1d28;border:1px solid var(--ring);cursor:pointer;user-select:none}
+    .pill.active{outline:2px solid var(--brand)}
+    .sep{height:1px;background:linear-gradient(90deg,transparent,rgba(255,255,255,.08),transparent);margin:8px 0}
+
+    /* ===== HERO ===== */
+    .hero{padding:18px}
+    .hero-wrap{display:grid;gap:18px;grid-template-columns:1.6fr .9fr}
+    @media (max-width:900px){.hero-wrap{grid-template-columns:1fr}}
+    .hero-left{display:grid;gap:12px}
+    .banner{width:100%;border-radius:16px;padding:18px;border:1px solid var(--ring);
+      background:
+       radial-gradient(1200px 300px at -10% 0%, rgba(255,77,109,.22), transparent 60%),
+       radial-gradient(800px 300px at 110% 50%, rgba(255,122,141,.18), transparent 60%),
+       linear-gradient(135deg,#1a1d28,#151822);}
+    .banner h1{margin:0 0 6px;font-size:26px;letter-spacing:.3px}
+    .banner p{margin:0;color:var(--muted)}
+    .hero-right{border:1px solid var(--ring);border-radius:16px;overflow:hidden;background:#10121a;display:grid;place-items:center}
+    .hero-art{
+      width:100%;height:100%;min-height:220px;
+      background:
+        linear-gradient(180deg, rgba(255,77,109,.10), rgba(255,122,141,.06)),
+        var(--hero-img),
+        radial-gradient(800px 300px at 110% 50%, rgba(255,122,141,.12), transparent 60%),
+        linear-gradient(135deg,#1a1d28,#151822);
+      background-repeat:no-repeat,no-repeat,no-repeat,no-repeat;
+      background-position:center, center, center, center;
+      background-size:auto, var(--hero-fit), auto, auto;
+    }
+
+    /* ===== CARDS ===== */
+    .card{background:var(--card);border:1px solid var(--ring);border-radius:18px;padding:14px;display:grid;gap:10px}
+    .card h4{margin:0;font-size:16px}
+    .meta{color:var(--muted);font-size:13px}
+    .badge{display:inline-flex;align-items:center;gap:6px;font-size:12px;padding:6px 8px;border-radius:999px;background:#222738;border:1px solid var(--ring)}
+    .favorito{margin-left:auto}
+    .fav{width:22px;height:22px;border-radius:8px;border:1px solid var(--ring);display:grid;place-items:center;cursor:pointer}
+    .fav.on{background:linear-gradient(135deg,var(--brand),#ff6f8b);color:#0b0e13}
+
+    footer{color:var(--muted);font-size:12px;padding:18px 6px 30px}
+    .safe{font-size:12px;color:#cfcfe6}
+    @media (max-width:480px){.logo-title{font-size:18px}}
+
+    .img-note{
+      position:fixed; right:10px; bottom:10px; background:#1a1d28; border:1px solid var(--ring);
+      color:#ffd1d9; padding:8px 10px; border-radius:10px; font-size:12px; display:none;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="container">
+    <header>
+      <div class="logo">
+        <div class="logo-badge">X</div>
+        <div>
+          <div class="logo-title">XexoApp</div>
+          <div class="sub">Portali, community e contatti (focus IT) per partnership</div>
+        </div>
+      </div>
+
+      <!-- NAV orizzontale con scroll; se va a capo resta allineato a sinistra -->
+      <nav id="topnav">
+        <button class="navbtn" onclick="jump('Portali ADV')">Portali ADV</button>
+        <button class="navbtn" onclick="jump('Forum')">Forum</button>
+        <button class="navbtn" onclick="jump('Club Privé')">Club Privé</button>
+        <button class="navbtn" onclick="jump('Saune Club')">Saune</button>
+        <button class="navbtn" onclick="jump('Directory')">Directory</button>
+      </nav>
+
+      <div class="brand-right">
+        <a href="https://xexofranchising.com" target="_blank" rel="noopener">
+          <img src="./xexo-logo.png" alt="xexofranchising.com" />
+        </a>
+        <!-- TOGGLE HERO FIT -->
+        <button class="navbtn" id="fitBtn" title="Cambia adattamento immagine">Hero: COVER</button>
+      </div>
+    </header>
+
+    <section class="panel hero">
+      <div class="hero-wrap">
+        <div class="hero-left">
+          <div class="banner">
+            <h1>PROMUOVI I TUOI SEXY TOYS IN 1 APP</h1>
+            <p>Tutto ciò che serve per contattare community, club, saune e reti ADV. Soft-safe, niente contenuti espliciti.</p>
+          </div>
+          <div id="presetWrap" class="grid grid-presets"></div>
+        </div>
+        <div class="hero-right">
+          <div class="hero-art" aria-hidden="true"></div>
+        </div>
+      </div>
+    </section>
+
+    <div class="sep"></div>
+
+    <section class="panel" style="padding:16px">
+      <div class="row" style="align-items:center">
+        <div class="pill active" data-cat="all" onclick="setCat(this,'all')">Tutte</div>
+        <div class="pill" data-cat="Portali ADV" onclick="setCat(this,'Portali ADV')">Portali ADV</div>
+        <div class="pill" data-cat="Forum" onclick="setCat(this,'Forum')">Forum</div>
+        <div class="pill" data-cat="Club Privé" onclick="setCat(this,'Club Privé')">Club Privé</div>
+        <div class="pill" data-cat="Saune Club" onclick="setCat(this,'Saune Club')">Saune Club</div>
+        <div class="pill" data-cat="Directory" onclick="setCat(this,'Directory')">Directory</div>
+        <div class="pill" data-cat="Blog" onclick="setCat(this,'Blog')">Blog</div>
+        <div class="pill" data-cat="Marketplace" onclick="setCat(this,'Marketplace')">Marketplace</div>
+        <div class="pill" data-cat="BDSM" onclick="setCat(this,'BDSM')">BDSM</div>
+        <div class="pill" data-cat="Influencer" onclick="setCat(this,'Influencer')">Influencer</div>
+        <div class="pill" data-cat="YouTuber" onclick="setCat(this,'YouTuber')">YouTuber</div>
+        <button class="btn btn-ghost" onclick="toggleFavView(this)">Solo preferiti: OFF</button>
+      </div>
+      <div class="sep"></div>
+      <div id="cards" class="grid grid-cards"></div>
+      <div class="sep"></div>
+      <div class="safe">Nota: verifica sempre le policy “adult” dei portali prima di acquistare spazi o pubblicare promo.</div>
+    </section>
+
+    <footer>
+      <div><strong>Note legali.</strong> XexoApp aggrega ricerche e collegamenti a siti terzi. Nessuna garanzia su risultati, approvazioni editoriali o disponibilità continuativa dei siti. Uso a discrezione dell’utente.</div>
+    </footer>
+  </div>
+
+  <div class="img-note" id="imgNote">Immagine header non trovata. Carica <code>header-banner.jpg</code> / <code>hero-xexo.jpg</code> nella root (rispetta maiuscole).</div>
+
+  <script>
+    // ======= PRESET RAPIDI =======
+    const PRESETS = [
+      { name:'Forum scambisti IT (Google)', icon:'💬', template:'https://www.google.com/search?q=forum+scambisti+italia+annunci' },
+      { name:'Club Privé Italia (Google)', icon:'🎫', template:'https://www.google.com/search?q=club+priv%C3%A9+scambisti+italia+eventi' },
+      { name:'BDSM Italia (Google)', icon:'🖤', template:'https://www.google.com/search?q=BDSM+forum+Italia' },
+      { name:'ADV adult networks', icon:'📈', template:'https://www.google.com/search?q=adult+ad+network+self+serve' }
+    ];
+
+    // ======= ELENCO LINK (NO COMPETITOR SHOP) =======
+    const LINKS = [
+      // --- PORTALI ADV ---
+      { id:11, nome:'ExoClick', categoria:'Portali ADV', descr:'Rete adv adult/mainstream', url:'https://www.exoclick.com/advertisers/', accetta:true, note:'Self-serve' },
+      { id:12, nome:'JuicyAds', categoria:'Portali ADV', descr:'Banner, native, pop', url:'https://www.juicyads.com/', accetta:true, note:'Self-serve' },
+      { id:13, nome:'TrafficJunky', categoria:'Portali ADV', descr:'Network tube premium', url:'https://www.trafficjunky.com/', accetta:true, note:'Self-serve' },
+      { id:14, nome:'TrafficStars', categoria:'Portali ADV', descr:'Display/Native adult', url:'https://www.trafficstars.com/', accetta:true, note:'Self-serve' },
+      { id:15, nome:'PlugRush', categoria:'Portali ADV', descr:'Traffic network', url:'https://www.plugrush.com/', accetta:true, note:'Self-serve' },
+      { id:16, nome:'AdXpansion', categoria:'Portali ADV', descr:'Native/Banner adult', url:'https://www.adxpansion.com/', accetta:true, note:'Self-serve' },
+      { id:17, nome:'Adsterra (adult friendly)', categoria:'Portali ADV', descr:'Pop/Display/CPA', url:'https://adsterra.com/advertisers/', accetta:true, note:'Verifica policy' },
+      { id:18, nome:'TrafficHaus', categoria:'Portali ADV', descr:'DSP/Exchange adult', url:'https://traffichaus.com/', accetta:true, note:'Self-serve' },
+
+      // --- Portali ADV (richiesti da te) ---
+      { id:31, nome:'SexyGuide International', categoria:'Portali ADV', descr:'Directory/advertising adult', url:'https://sexyguideinternational.com/', accetta:true, note:'Directory/ADV' },
+      { id:32, nome:'Escort Advisor', categoria:'Portali ADV', descr:'Directory con spazi pubblicitari', url:'https://www.escort-advisor.com/', accetta:true, note:'ADV available' },
+      { id:33, nome:'Pablito Escort', categoria:'Portali ADV', descr:'Annunci/ADV', url:'https://pablitoescort.com/', accetta:true, note:'ADV available' },
+      { id:34, nome:'Piccole Trasgressioni', categoria:'Portali ADV', descr:'Annunci/ADV', url:'https://www.piccoletrasgressioni.it/', accetta:true, note:'ADV available' },
+      { id:35, nome:'OnlyFans (promo / collab)', categoria:'Portali ADV', descr:'Collaborazioni con creator', url:'https://onlyfans.com/', accetta:true, note:'Collab creator' },
+
+      // --- FORUM / COMMUNITY ---
+      { id:101, nome:'JOYclub (EU swingers)', categoria:'Forum', descr:'Community EU eventi e gruppi', url:'https://www.joyclub.com/', accetta:true, note:'Multi-lingua' },
+      { id:102, nome:'Forum Italia Naturista (A.N.ITA.)', categoria:'Forum', descr:'Forum ufficiale A.N.ITA.', url:'https://forum.italianaturista.it/', accetta:true, note:'IT' },
+      { id:103, nome:'iNudisti – Forum', categoria:'Forum', descr:'Grande community naturista', url:'https://www.inudisti.it/forum/', accetta:true, note:'IT' },
+      { id:104, nome:'eXtraVillage – Naturismo', categoria:'Forum', descr:'Sezione naturismo', url:'https://forum.extravillage.it/viewforum.php?f=38', accetta:true, note:'IT' },
+
+      // --- BDSM ---
+      { id:201, nome:'FetLife', categoria:'BDSM', descr:'Community mondiale (login)', url:'https://fetlife.com/', accetta:true, note:'EN' },
+      { id:202, nome:'Gabbia.com', categoria:'BDSM', descr:'Community & risorse IT', url:'https://www.gabbia.com/', accetta:true, note:'IT' },
+
+      // --- CLUB PRIVÉ IT ---
+      { id:301, nome:'Krystal Club', categoria:'Club Privé', descr:'Locale scambisti', url:'https://www.krystal-club.it/', accetta:true, note:'IT' },
+      { id:302, nome:'ScambistiPerCaso — Club', categoria:'Club Privé', descr:'Elenco club/locali', url:'https://www.scambistipercaso.it/club', accetta:true, note:'IT' },
+      { id:303, nome:'La Villa Club Privé', categoria:'Club Privé', descr:'Locale scambisti', url:'https://lavillaclubprive.it/', accetta:true, note:'IT' },
+      { id:304, nome:'GIÒG — Migliori locali', categoria:'Club Privé', descr:'Guida locali in Italia', url:'https://giog.it/locali-per-scambisti-ecco-i-10-migliori-in-italia/', accetta:true, note:'IT' },
+      { id:305, nome:'Flirt Club', categoria:'Club Privé', descr:'Locale scambisti', url:'https://www.flirtclub.it/', accetta:true, note:'IT' },
+      { id:306, nome:'La Maison de L’Amour', categoria:'Club Privé', descr:'Locale scambisti', url:'https://www.lamaisondelamour.com/', accetta:true, note:'IT' },
+      { id:307, nome:'Olimpo Club', categoria:'Club Privé', descr:'Locale scambisti', url:'https://www.olimpoclub.com/', accetta:true, note:'IT' },
+
+      // --- SAUNE CLUB (AT/SI) ---
+      { id:401, nome:'Wellcum (AT) — IT', categoria:'Saune Club', descr:'FKK / sauna club, Carinzia', url:'https://wellcum.at/it/', accetta:true, note:'AT' },
+      { id:402, nome:'Babylon Klagenfurt (AT)', categoria:'Saune Club', descr:'Sauna club Klagenfurt', url:'https://www.babyloncastle.com/home-it/klagenfurt-ita/', accetta:true, note:'AT' },
+      { id:403, nome:'Amoria (AT)', categoria:'Saune Club', descr:'Sauna club', url:'https://www.amoria.at', accetta:true, note:'AT' },
+      { id:404, nome:'Atlantis (AT)', categoria:'Saune Club', descr:'Sauna club', url:'https://www.saunaclub-atlantis.at', accetta:true, note:'AT' },
+      { id:405, nome:'Margerita (SI)', categoria:'Saune Club', descr:'Sauna club', url:'https://margerita.si', accetta:true, note:'SI' },
+
+      // --- DIRECTORY ---
+      { id:601, nome:'Joyclub — Club & Eventi (EU)', categoria:'Directory', descr:'Sezione club Joyclub', url:'https://www.joyclub.com/magazine/en/club', accetta:true, note:'EU' },
+      { id:602, nome:'Eventi swingers Italia (Google)', categoria:'Directory', descr:'Ricerca eventi/party IT', url:'https://www.google.com/search?q=eventi+swingers+italia+calendar', accetta:true, note:'Ricerca' },
+
+      // --- BLOG / MEDIA soft ---
+      { id:701, nome:'Rolling Stone — sesso (IT)', categoria:'Blog', descr:'Sezione cultura/soft', url:'https://www.rollingstone.it/tag/sesso/', accetta:true, note:'IT' },
+      { id:702, nome:'Wired — scienza/sessualità', categoria:'Blog', descr:'Contenuti informativi soft', url:'https://www.wired.it/search/?q=sesso', accetta:true, note:'IT' },
+
+      // --- MARKETPLACE ---
+      { id:801, nome:'Amazon', categoria:'Marketplace', descr:'Ricerca prodotti / vetrina', url:'https://www.amazon.it/s?k=sex+toy', accetta:true, note:'Policy adult' },
+      { id:802, nome:'eBay', categoria:'Marketplace', descr:'Ricerca prodotti / vetrina', url:'https://www.ebay.it/sch/i.html?_nkw=sex+toy', accetta:true, note:'Policy adult' },
+      { id:803, nome:'Etsy', categoria:'Marketplace', descr:'Artigianale adult', url:'https://www.etsy.com/search?q=sex+toy', accetta:true, note:'Policy adult' },
+      { id:804, nome:'Wish', categoria:'Marketplace', descr:'Ricerca prodotti', url:'https://www.wish.com/search/sex%20toy', accetta:true, note:'Policy adult' },
+      { id:805, nome:'Alibaba (B2B)', categoria:'Marketplace', descr:'Fornitori / B2B', url:'https://www.alibaba.com/trade/search?SearchText=sex+toy', accetta:true, note:'B2B' },
+
+      // --- INFLUENCER / YT ---
+      { id:901, nome:'Instagram — sex toy IT', categoria:'Influencer', descr:'Cerca creator italiani', url:'https://www.google.com/search?q=site%3Ainstagram.com+sex+toy+review+italia', accetta:true, note:'Ricerca' },
+      { id:902, nome:'TikTok — lingerie/sex toy IT', categoria:'Influencer', descr:'Cerca creator italiani', url:'https://www.google.com/search?q=site%3Atiktok.com+lingerie+sex+toy+recensione+italiano', accetta:true, note:'Ricerca' },
+      { id:903, nome:'YouTube — sex toy IT', categoria:'YouTuber', descr:'Cerca canali/review IT', url:'https://www.youtube.com/results?search_query=sex+toy+recensione+italiano', accetta:true, note:'Ricerca' }
+    ];
+
+    // ======= STATO & UTILITY =======
+    let currentCat = 'all';
+    let showFavOnly = false;
+    const favKey = 'xexo_favs_v1';
+    const fitKey = 'xexo_fit_v1';
+    const $ = sel => document.querySelector(sel);
+    const $all = sel => Array.from(document.querySelectorAll(sel));
+
+    function applyPreset(tpl){ window.open(tpl, '_blank'); }
+    function jump(cat){
+      const pill = Array.from(document.querySelectorAll('.pill')).find(p=>p.dataset.cat===cat);
+      if(pill){ pill.click(); window.scrollTo({top: document.querySelector('#cards').offsetTop-40, behavior:'smooth'}); }
+    }
+    function setCat(el,cat){
+      currentCat = cat;
+      $all('.pill').forEach(p=>p.classList.remove('active'));
+      el.classList.add('active');
+      renderCards();
+    }
+    function getFavs(){ try{ return JSON.parse(localStorage.getItem(favKey)||'[]'); }catch(e){ return []; } }
+    function setFavs(arr){ localStorage.setItem(favKey, JSON.stringify(arr)); }
+    function isFav(id){ return getFavs().includes(id); }
+    function toggleFav(id){
+      const f = new Set(getFavs());
+      f.has(id) ? f.delete(id) : f.add(id);
+      setFavs([...f]); renderCards();
+    }
+    function toggleFavView(btn){
+      showFavOnly = !showFavOnly;
+      btn.textContent = `Solo preferiti: ${showFavOnly? 'ON':'OFF'}`;
+      renderCards();
+    }
+
+    // ======= RENDER =======
+    function renderPresets(){
+      const wrap = $('#presetWrap'); wrap.innerHTML = '';
+      PRESETS.forEach(p=>{
+        const b = document.createElement('button');
+        b.className = 'btn btn-primary';
+        b.textContent = `${p.icon} ${p.name}`;
+        b.onclick = () => applyPreset(p.template);
+        wrap.appendChild(b);
+      });
+    }
+    function renderCards(){
+      const wrap = $('#cards'); wrap.innerHTML = '';
+      let data = LINKS.slice();
+      if(currentCat!=='all') data = data.filter(x=>x.categoria===currentCat);
+      if(showFavOnly){ const f=new Set(getFavs()); data = data.filter(x=>f.has(x.id)); }
+      data.forEach(item=>{
+        const card = document.createElement('div');
+        card.className='card';
+        const top = document.createElement('div');
+        top.style.display='flex'; top.style.alignItems='center'; top.style.gap='10px';
+        const h4 = document.createElement('h4'); h4.textContent=item.nome;
+        const badge = document.createElement('span'); badge.className='badge'; badge.textContent=item.categoria;
+        const fav = document.createElement('div'); fav.className='fav'+(isFav(item.id)?' on':''); fav.title='Aggiungi ai preferiti'; fav.innerHTML='★'; fav.onclick=()=>toggleFav(item.id);
+        fav.classList.add('favorito');
+        top.append(h4,badge,fav);
+        const meta = document.createElement('div'); meta.className='meta'; meta.textContent = item.descr + (item.note?` • ${item.note}`:'');
+        const actions = document.createElement('div'); actions.className='row';
+        const go = document.createElement('a'); go.className='btn btn-primary'; go.target='_blank'; go.rel='noopener'; go.href=item.url; go.textContent='Visita';
+        const info = document.createElement('span'); info.className='hint'; info.textContent = item.accetta? 'Adult-friendly' : 'Limitazioni';
+        actions.append(go, info);
+        card.append(top, meta, actions);
+        wrap.appendChild(card);
+      });
+      if(!data.length){
+        const empty = document.createElement('div');
+        empty.className='hint';
+        empty.textContent='Nessun risultato per questo filtro.';
+        wrap.appendChild(empty);
+      }
+    }
+
+    // ======= HERO IMAGE LOADER + TOGGLE COVER/CONTAIN =======
+    (function(){
+      const candidates = [
+        'header-banner.jpg','header-banner.jpeg','header-banner.JPG','header-banner.JPEG',
+        'hero-xexo.jpg','hero-xexo.jpeg'
+      ];
+      function tryLoad(i){
+        if(i>=candidates.length){
+          document.getElementById('imgNote').style.display='block';
+          return;
+        }
+        const src = './'+candidates[i];
+        const img = new Image();
+        img.onload = function(){
+          document.documentElement.style.setProperty('--hero-img', `url('${src}')`);
+        };
+        img.onerror = function(){ tryLoad(i+1); };
+        img.src = src+'?v='+(Date.now());
+      }
+      tryLoad(0);
+
+      // toggle fit + persistenza
+      const fitBtn = document.getElementById('fitBtn');
+      const savedFit = localStorage.getItem(fitKey) || 'cover';
+      setFit(savedFit);
+
+      fitBtn.addEventListener('click', ()=>{
+        const next = (localStorage.getItem(fitKey)==='cover') ? 'contain' : 'cover';
+        setFit(next);
+      });
+
+      function setFit(val){
+        document.documentElement.style.setProperty('--hero-fit', val);
+        localStorage.setItem(fitKey, val);
+        fitBtn.textContent = 'Hero: ' + val.toUpperCase();
+      }
+    })();
+
+    // ======= INIT =======
+    renderPresets();
+    renderCards();
+
+    // ======= SERVICE WORKER (PWA) =======
+    if ('serviceWorker' in navigator) {
+      window.addEventListener('load', () => {
+        navigator.serviceWorker.register('./service-worker.js');
+      });
+    }
+  </script>
+
+  <noscript>
+    <div style="padding:10px;color:#ffd1d9">Attiva JavaScript per caricare l’immagine dell’header.</div>
+  </noscript>
+</body>
+</html>
