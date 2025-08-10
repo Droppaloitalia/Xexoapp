@@ -42,60 +42,36 @@
     .container{max-width:1100px;margin:0 auto;padding:20px}
 
     /* HEADER + MENU */
-    /* HEADER + MENU */
-header{
-  display:flex; align-items:center; gap:16px; position:sticky; top:0; z-index:20;
-  background:linear-gradient(180deg, rgba(13,14,18,.92) 60%, rgba(13,14,18,0));
-  backdrop-filter: blur(6px); padding:14px 0 10px;
-}
-.logo{display:flex;align-items:center;gap:10px}
-.logo-badge{width:40px;height:40px;border-radius:12px;
-  background:linear-gradient(135deg,var(--brand),var(--brand-2));
-  display:grid;place-items:center;box-shadow:var(--shadow);font-weight:800}
-.logo-title{font-size:22px;font-weight:800;letter-spacing:.3px}
-.sub{color:var(--muted);font-size:12px}
+    header{
+      display:flex; align-items:center; gap:16px; position:sticky; top:0; z-index:20;
+      background:linear-gradient(180deg, rgba(13,14,18,.92) 60%, rgba(13,14,18,0));
+      backdrop-filter: blur(6px); padding:14px 0 10px;
+    }
+    .logo{display:flex;align-items:center;gap:10px}
+    .logo-badge{width:40px;height:40px;border-radius:12px;
+      background:linear-gradient(135deg,var(--brand),var(--brand-2));
+      display:grid;place-items:center;box-shadow:var(--shadow);font-weight:800}
+    .logo-title{font-size:22px;font-weight:800;letter-spacing:.3px}
+    .sub{color:var(--muted);font-size:12px}
 
-/* NAV desktop default */
-nav{
-  margin-left:auto; display:flex; gap:8px;
-  flex-wrap:wrap; overflow:visible; max-width:none;
-}
-.navbtn{
-  display:inline-flex; align-items:center; justify-content:center;
-  flex:0 0 auto; white-space:nowrap;
-  appearance:none; border:1px solid var(--ring); background:#1a1d28; color:#fff;
-  border-radius:999px; padding:8px 12px; cursor:pointer; font-weight:600;
-}
-.navbtn:hover{filter:brightness(1.08)}
-
-.brand-right{display:flex;align-items:center;margin-left:8px;gap:8px}
-.brand-right img{height:34px;width:auto;border-radius:8px;object-fit:contain;border:1px solid var(--ring);padding:4px}
-
-/* --- MOBILE FIX: nav a tutta larghezza con scroll orizzontale --- */
-@media (max-width: 900px){
-  header{
-    display:grid;
-    grid-template-columns: 1fr auto;
-    grid-auto-rows:auto;
-    row-gap:8px;
-    align-items:center;
-  }
-  .logo{grid-column:1/2}
-  .brand-right{grid-column:2/3; justify-self:end}
-  nav{
-    grid-column:1/-1;               /* nav su una riga sotto */
-    order:3;
-    display:flex; gap:8px;
-    overflow-x:auto;                /* scroll orizzontale */
-    -webkit-overflow-scrolling:touch;
-    scrollbar-width:none;           /* Firefox */
-    width:100%;
-    padding-bottom:4px;
-  }
-  nav::-webkit-scrollbar{display:none} /* Chrome/Safari */
-  .navbtn{flex:0 0 auto}
-}
-
+    /* NAV: sempre orizzontale; su mobile scrolla lateralmente */
+    #topnav{
+      margin-left:auto; display:flex; gap:8px;
+      flex-wrap:nowrap;                    /* non andare a capo */
+      overflow-x:auto; overflow-y:hidden;  /* scroll orizzontale */
+      -webkit-overflow-scrolling:touch;
+      scrollbar-width:none;                /* Firefox */
+      max-width:100%;
+      white-space:nowrap;
+    }
+    #topnav::-webkit-scrollbar{ display:none } /* Chrome/Safari */
+    .navbtn{
+      display:inline-flex; align-items:center; justify-content:center;
+      flex:0 0 auto; white-space:nowrap;
+      appearance:none; border:1px solid var(--ring); background:#1a1d28; color:#fff;
+      border-radius:999px; padding:8px 12px; cursor:pointer; font-weight:600;
+    }
+    .navbtn:hover{filter:brightness(1.08)}
 
     .brand-right{display:flex;align-items:center;margin-left:8px;gap:8px}
     .brand-right img{height:34px;width:auto;border-radius:8px;object-fit:contain;border:1px solid var(--ring);padding:4px}
@@ -169,13 +145,16 @@ nav{
           <div class="sub">Portali, community e contatti (focus IT) per partnership</div>
         </div>
       </div>
-      <nav>
+
+      <!-- NAV con id per regole mirate -->
+      <nav id="topnav">
         <button class="navbtn" onclick="jump('Portali ADV')">Portali ADV</button>
         <button class="navbtn" onclick="jump('Forum')">Forum</button>
         <button class="navbtn" onclick="jump('Club Privé')">Club Privé</button>
         <button class="navbtn" onclick="jump('Saune Club')">Saune</button>
         <button class="navbtn" onclick="jump('Directory')">Directory</button>
       </nav>
+
       <div class="brand-right">
         <a href="https://xexofranchising.com" target="_blank" rel="noopener">
           <img src="./xexo-logo.png" alt="xexofranchising.com" />
