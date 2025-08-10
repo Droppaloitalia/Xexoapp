@@ -1,4 +1,5 @@
-const CACHE = "xexoapp-v1";
+const CACHE = "xexoapp-v4"; // bump per forzare refresh
+";
 const ASSETS = [
   "./",
   "./index.html",
