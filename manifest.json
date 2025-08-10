@@ -1,8 +1,8 @@
 {
   "name": "XexoApp — SexyTraffic Finder",
   "short_name": "XexoApp",
-  "start_url": "./index.html",
-  "scope": "./",
+  "start_url": "/Xexoapp/",
+  "scope": "/Xexoapp/",
   "display": "standalone",
   "background_color": "#0d0e12",
   "theme_color": "#ff4d6d",
