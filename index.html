@@ -60,13 +60,13 @@
     #topnav{
       grid-column:2/3;
       display:flex; gap:8px;
-      flex-wrap:nowrap;                  /* evita colonna */
+      flex-wrap:nowrap;
       overflow-x:auto; overflow-y:hidden;
       -webkit-overflow-scrolling:touch;
       scrollbar-width:none;
       max-width:100%;
       white-space:nowrap;
-      justify-content:flex-start;        /* allinea a sinistra */
+      justify-content:flex-start;
     }
     #topnav::-webkit-scrollbar{ display:none }
     .navbtn{
@@ -83,16 +83,15 @@
     }
     .brand-right img{height:34px;width:auto;border-radius:8px;object-fit:contain;border:1px solid var(--ring);padding:4px}
 
-    /* Su schermi stretti: nav occupa una riga intera sotto il logo, ma resta orizzontale */
     @media (max-width: 780px){
       header{
-        grid-template-columns: 1fr auto;   /* logo | brand */
+        grid-template-columns: 1fr auto;
         grid-auto-rows:auto;
       }
       .logo{grid-column:1/2}
       .brand-right{grid-column:2/3}
       #topnav{
-        grid-column:1/-1;             /* nav sotto, a tutta larghezza */
+        grid-column:1/-1;
         order:3;
       }
     }
@@ -167,13 +166,14 @@
         </div>
       </div>
 
-      <!-- NAV orizzontale con scroll; se va a capo resta allineato a sinistra -->
+      <!-- NAV orizzontale con scroll -->
       <nav id="topnav">
         <button class="navbtn" onclick="jump('Portali ADV')">Portali ADV</button>
         <button class="navbtn" onclick="jump('Forum')">Forum</button>
-        <button class="navbtn" onclick="jump('Club Privé')">Club Privé</button>
+        <button class="navbtn" onclick="jump('Club Privè · Lapdance · Nightclub')">Club Privè</button>
         <button class="navbtn" onclick="jump('Saune Club')">Saune</button>
-        <button class="navbtn" onclick="jump('Directory')">Directory</button>
+        <button class="navbtn" onclick="jump('Scambisti')">Scambisti</button>
+        <button class="navbtn" onclick="jump('LGBT')">LGBT</button>
       </nav>
 
       <div class="brand-right">
@@ -207,12 +207,13 @@
         <div class="pill active" data-cat="all" onclick="setCat(this,'all')">Tutte</div>
         <div class="pill" data-cat="Portali ADV" onclick="setCat(this,'Portali ADV')">Portali ADV</div>
         <div class="pill" data-cat="Forum" onclick="setCat(this,'Forum')">Forum</div>
-        <div class="pill" data-cat="Club Privé" onclick="setCat(this,'Club Privé')">Club Privé</div>
+        <div class="pill" data-cat="Club Privè · Lapdance · Nightclub" onclick="setCat(this,'Club Privè · Lapdance · Nightclub')">Club Privè</div>
         <div class="pill" data-cat="Saune Club" onclick="setCat(this,'Saune Club')">Saune Club</div>
-        <div class="pill" data-cat="Directory" onclick="setCat(this,'Directory')">Directory</div>
+        <div class="pill" data-cat="Scambisti" onclick="setCat(this,'Scambisti')">Scambisti</div>
         <div class="pill" data-cat="Blog" onclick="setCat(this,'Blog')">Blog</div>
         <div class="pill" data-cat="Marketplace" onclick="setCat(this,'Marketplace')">Marketplace</div>
         <div class="pill" data-cat="BDSM" onclick="setCat(this,'BDSM')">BDSM</div>
+        <div class="pill" data-cat="LGBT" onclick="setCat(this,'LGBT')">LGBT</div>
         <div class="pill" data-cat="Influencer" onclick="setCat(this,'Influencer')">Influencer</div>
         <div class="pill" data-cat="YouTuber" onclick="setCat(this,'YouTuber')">YouTuber</div>
         <button class="btn btn-ghost" onclick="toggleFavView(this)">Solo preferiti: OFF</button>
@@ -267,15 +268,46 @@
       // --- BDSM ---
       { id:201, nome:'FetLife', categoria:'BDSM', descr:'Community mondiale (login)', url:'https://fetlife.com/', accetta:true, note:'EN' },
       { id:202, nome:'Gabbia.com', categoria:'BDSM', descr:'Community & risorse IT', url:'https://www.gabbia.com/', accetta:true, note:'IT' },
+      { id:1201, nome:'myfetishroom.forumcommunity.net', categoria:'BDSM', descr:'Forumcommunity', url:'https://myfetishroom.forumcommunity.net', accetta:true, note:'IT' },
+      { id:1202, nome:'femdomlifestyle.forumfree.it', categoria:'BDSM', descr:'ForumFree', url:'https://femdomlifestyle.forumfree.it', accetta:true, note:'IT' },
+      { id:1203, nome:'ilrifugiodelpeccatorebdsm.forumcommunity.net', categoria:'BDSM', descr:'Forumcommunity', url:'https://ilrifugiodelpeccatorebdsm.forumcommunity.net', accetta:true, note:'IT' },
+      { id:1204, nome:'eroticamentebdsm.forumcommunity.net', categoria:'BDSM', descr:'Forumcommunity', url:'https://eroticamentebdsm.forumcommunity.net', accetta:true, note:'IT' },
+      { id:1205, nome:'legamidiseta.forumcommunity.net', categoria:'BDSM', descr:'Forumcommunity', url:'https://legamidiseta.forumcommunity.net', accetta:true, note:'IT' },
+      { id:1206, nome:'dannatamentebdsm.forumcommunity.net', categoria:'BDSM', descr:'Forumcommunity', url:'https://dannatamentebdsm.forumcommunity.net', accetta:true, note:'IT' },
+      { id:1207, nome:'smfetish.forumcommunity.net', categoria:'BDSM', descr:'Forumcommunity', url:'https://smfetish.forumcommunity.net', accetta:true, note:'IT' },
+      { id:1208, nome:'ilbavaglio.forumcommunity.net', categoria:'BDSM', descr:'Forumcommunity', url:'https://ilbavaglio.forumcommunity.net', accetta:true, note:'IT' },
 
-      // --- CLUB PRIVÉ IT ---
-      { id:301, nome:'Krystal Club', categoria:'Club Privé', descr:'Locale scambisti', url:'https://www.krystal-club.it/', accetta:true, note:'IT' },
-      { id:302, nome:'ScambistiPerCaso — Club', categoria:'Club Privé', descr:'Elenco club/locali', url:'https://www.scambistipercaso.it/club', accetta:true, note:'IT' },
-      { id:303, nome:'La Villa Club Privé', categoria:'Club Privé', descr:'Locale scambisti', url:'https://lavillaclubprive.it/', accetta:true, note:'IT' },
-      { id:304, nome:'GIÒG — Migliori locali', categoria:'Club Privé', descr:'Guida locali in Italia', url:'https://giog.it/locali-per-scambisti-ecco-i-10-migliori-in-italia/', accetta:true, note:'IT' },
-      { id:305, nome:'Flirt Club', categoria:'Club Privé', descr:'Locale scambisti', url:'https://www.flirtclub.it/', accetta:true, note:'IT' },
-      { id:306, nome:'La Maison de L’Amour', categoria:'Club Privé', descr:'Locale scambisti', url:'https://www.lamaisondelamour.com/', accetta:true, note:'IT' },
-      { id:307, nome:'Olimpo Club', categoria:'Club Privé', descr:'Locale scambisti', url:'https://www.olimpoclub.com/', accetta:true, note:'IT' },
+      // --- LGBT (NUOVA CATEGORIA) ---
+      { id:1301, nome:'gay-forum.it', categoria:'LGBT', descr:'Forum community', url:'https://www.gay-forum.it', accetta:true, note:'IT' },
+      { id:1302, nome:'indelebilmente.forumfree.it', categoria:'LGBT', descr:'ForumFree', url:'https://indelebilmente.forumfree.it', accetta:true, note:'IT' },
+      { id:1303, nome:'planetjuliet.forumfree.it', categoria:'LGBT', descr:'ForumFree', url:'https://planetjuliet.forumfree.it', accetta:true, note:'IT' },
+      { id:1304, nome:'gabriel.forumfree.it', categoria:'LGBT', descr:'ForumFree', url:'https://gabriel.forumfree.it', accetta:true, note:'IT' },
+      { id:1305, nome:'netbattle.forumfree.it', categoria:'LGBT', descr:'ForumFree', url:'https://netbattle.forumfree.it', accetta:true, note:'IT' },
+
+      // --- CLUB PRIVÈ / LAPDANCE / NIGHTCLUB ---
+      { id:301, nome:'Krystal Club', categoria:'Club Privè · Lapdance · Nightclub', descr:'Locale scambisti', url:'https://www.krystal-club.it/', accetta:true, note:'IT' },
+      { id:302, nome:'ScambistiPerCaso — Club', categoria:'Club Privè · Lapdance · Nightclub', descr:'Elenco club/locali', url:'https://www.scambistipercaso.it/club', accetta:true, note:'IT' },
+      { id:303, nome:'La Villa Club Privé', categoria:'Club Privè · Lapdance · Nightclub', descr:'Locale scambisti', url:'https://lavillaclubprive.it/', accetta:true, note:'IT' },
+      { id:304, nome:'GIÒG — Migliori locali', categoria:'Club Privè · Lapdance · Nightclub', descr:'Guida locali in Italia', url:'https://giog.it/locali-per-scambisti-ecco-i-10-migliori-in-italia/', accetta:true, note:'IT' },
+      { id:305, nome:'Flirt Club', categoria:'Club Privè · Lapdance · Nightclub', descr:'Locale scambisti', url:'https://www.flirtclub.it/', accetta:true, note:'IT' },
+      { id:306, nome:'La Maison de L’Amour', categoria:'Club Privè · Lapdance · Nightclub', descr:'Locale scambisti', url:'https://www.lamaisondelamour.com/', accetta:true, note:'IT' },
+      { id:307, nome:'Olimpo Club', categoria:'Club Privè · Lapdance · Nightclub', descr:'Locale scambisti', url:'https://www.olimpoclub.com/', accetta:true, note:'IT' },
+
+      { id:1401, nome:'capriccioclubprive.com', categoria:'Club Privè · Lapdance · Nightclub', descr:'Club Privé', url:'https://www.capriccioclubprive.com', accetta:true, note:'IT' },
+      { id:1402, nome:'muccassassina.com', categoria:'Club Privè · Lapdance · Nightclub', descr:'Club/eventi', url:'https://www.muccassassina.com', accetta:true, note:'IT' },
+      { id:1403, nome:'phibeach.com', categoria:'Club Privè · Lapdance · Nightclub', descr:'Beach club', url:'https://phibeach.com', accetta:true, note:'IT' },
+      { id:1404, nome:'cafecollebereto.com', categoria:'Club Privè · Lapdance · Nightclub', descr:'Club/Cocktail bar', url:'https://www.cafecollebereto.com/it/', accetta:true, note:'IT' },
+      { id:1405, nome:'lapdancevicenza.it', categoria:'Club Privè · Lapdance · Nightclub', descr:'Lapdance', url:'https://www.lapdancevicenza.it', accetta:true, note:'IT' },
+      { id:1406, nome:'La Nuit Night Club (Facebook)', categoria:'Club Privè · Lapdance · Nightclub', descr:'Night club', url:'https://www.facebook.com/p/La-Nuit-Night-Club--100064826015589/?locale=it_IT', accetta:true, note:'IT' },
+      { id:1407, nome:'privilegeclubprivate.it', categoria:'Club Privè · Lapdance · Nightclub', descr:'Club Privé', url:'https://www.privilegeclubprivate.it', accetta:true, note:'IT' },
+      { id:1408, nome:'Bikini Night Club San Rufo (Facebook)', categoria:'Club Privè · Lapdance · Nightclub', descr:'Night club', url:'https://www.facebook.com/bikininightclubsanrufo/?locale=it_IT', accetta:true, note:'IT' },
+      { id:1409, nome:'citynightclubverona.it', categoria:'Club Privè · Lapdance · Nightclub', descr:'Night club', url:'http://citynightclubverona.it', accetta:true, note:'IT' },
+      { id:1410, nome:'venusexclusive.it', categoria:'Club Privè · Lapdance · Nightclub', descr:'Night club', url:'https://www.venusexclusive.it', accetta:true, note:'IT' },
+      { id:1411, nome:'penelopesexydisco.it', categoria:'Club Privè · Lapdance · Nightclub', descr:'Sexy disco', url:'https://www.penelopesexydisco.it', accetta:true, note:'IT' },
+      { id:1412, nome:'breaksbeer.com', categoria:'Club Privè · Lapdance · Nightclub', descr:'Disco/club', url:'https://www.breaksbeer.com', accetta:true, note:'IT' },
+      { id:1413, nome:'orablunightclub.it', categoria:'Club Privè · Lapdance · Nightclub', descr:'Night club', url:'https://www.orablunightclub.it', accetta:true, note:'IT' },
+      { id:1414, nome:'Harem Lux Rogolo (Facebook)', categoria:'Club Privè · Lapdance · Nightclub', descr:'Night club', url:'https://www.facebook.com/haremluxrogolo', accetta:true, note:'IT' },
+      { id:1415, nome:'pepenero.com', categoria:'Club Privè · Lapdance · Nightclub', descr:'Night club', url:'https://pepenero.com', accetta:true, note:'IT' },
 
       // --- SAUNE CLUB (AT/SI) ---
       { id:401, nome:'Wellcum (AT) — IT', categoria:'Saune Club', descr:'FKK / sauna club, Carinzia', url:'https://wellcum.at/it/', accetta:true, note:'AT' },
@@ -284,13 +316,30 @@
       { id:404, nome:'Atlantis (AT)', categoria:'Saune Club', descr:'Sauna club', url:'https://www.saunaclub-atlantis.at', accetta:true, note:'AT' },
       { id:405, nome:'Margerita (SI)', categoria:'Saune Club', descr:'Sauna club', url:'https://margerita.si', accetta:true, note:'SI' },
 
-      // --- DIRECTORY ---
-      { id:601, nome:'Joyclub — Club & Eventi (EU)', categoria:'Directory', descr:'Sezione club Joyclub', url:'https://www.joyclub.com/magazine/en/club', accetta:true, note:'EU' },
-      { id:602, nome:'Eventi swingers Italia (Google)', categoria:'Directory', descr:'Ricerca eventi/party IT', url:'https://www.google.com/search?q=eventi+swingers+italia+calendar', accetta:true, note:'Ricerca' },
+      // --- SCAMBISTI (ex "Directory") ---
+      { id:601, nome:'Joyclub — Club & Eventi (EU)', categoria:'Scambisti', descr:'Sezione club Joyclub', url:'https://www.joyclub.com/magazine/en/club', accetta:true, note:'EU' },
+      { id:602, nome:'Eventi swingers Italia (Google)', categoria:'Scambisti', descr:'Ricerca eventi/party IT', url:'https://www.google.com/search?q=eventi+swingers+italia+calendar', accetta:true, note:'Ricerca' },
+      { id:1501, nome:'leprisonnier-eventi.it', categoria:'Scambisti', descr:'Eventi', url:'https://leprisonnier-eventi.it', accetta:true, note:'IT' },
+      { id:1502, nome:'bugiaclub.it', categoria:'Scambisti', descr:'Club', url:'http://www.bugiaclub.it/#home', accetta:true, note:'IT' },
+      { id:1503, nome:'krystal-club.it', categoria:'Scambisti', descr:'Club', url:'https://www.krystal-club.it', accetta:true, note:'IT' },
+      { id:1504, nome:'infinitoclubmilano.com', categoria:'Scambisti', descr:'Club', url:'https://www.infinitoclubmilano.com', accetta:true, note:'IT' },
+      { id:1505, nome:'newlunaclubprive.it', categoria:'Scambisti', descr:'Club', url:'https://www.newlunaclubprive.it', accetta:true, note:'IT' },
+      { id:1506, nome:'scambistipercaso.it/club', categoria:'Scambisti', descr:'Elenco club', url:'https://www.scambistipercaso.it/club', accetta:true, note:'IT' },
+      { id:1507, nome:'noirprive.it', categoria:'Scambisti', descr:'Club', url:'https://www.noirprive.it', accetta:true, note:'IT' },
+      { id:1508, nome:'hollywoodprive.com/it', categoria:'Scambisti', descr:'Club', url:'https://hollywoodprive.com/it', accetta:true, note:'IT' },
+      { id:1509, nome:'lemoulinprive.com', categoria:'Scambisti', descr:'Club', url:'https://www.lemoulinprive.com', accetta:true, note:'IT' },
+      { id:1510, nome:'annunci69.it/clubprive', categoria:'Scambisti', descr:'Elenco club', url:'https://www.annunci69.it/clubprive/', accetta:true, note:'IT' },
+      { id:1511, nome:'lamaisondelamour.com', categoria:'Scambisti', descr:'Club', url:'https://www.lamaisondelamour.com', accetta:true, note:'IT' },
+      { id:1512, nome:'panaceaclub.com', categoria:'Scambisti', descr:'Club', url:'https://www.panaceaclub.com', accetta:true, note:'IT' },
+      { id:1513, nome:'clublsn.it', categoria:'Scambisti', descr:'Club', url:'https://www.clublsn.it', accetta:true, note:'IT' },
+      { id:1514, nome:'morriganclub.it', categoria:'Scambisti', descr:'Club', url:'https://www.morriganclub.it', accetta:true, note:'IT' },
 
       // --- BLOG / MEDIA soft ---
       { id:701, nome:'Rolling Stone — sesso (IT)', categoria:'Blog', descr:'Sezione cultura/soft', url:'https://www.rollingstone.it/tag/sesso/', accetta:true, note:'IT' },
       { id:702, nome:'Wired — scienza/sessualità', categoria:'Blog', descr:'Contenuti informativi soft', url:'https://www.wired.it/search/?q=sesso', accetta:true, note:'IT' },
+      { id:1601, nome:'blog.gpleasure.com', categoria:'Blog', descr:'Blog', url:'https://blog.gpleasure.com', accetta:true, note:'IT' },
+      { id:1602, nome:'forum.alfemminile.com · sesso', categoria:'Blog', descr:'Sezione forum', url:'https://forum.alfemminile.com/categories/sesso', accetta:true, note:'IT' },
+      { id:1603, nome:'ohmytei.it', categoria:'Blog', descr:'Blog', url:'https://ohmytei.it', accetta:true, note:'IT' },
 
       // --- MARKETPLACE ---
       { id:801, nome:'Amazon', categoria:'Marketplace', descr:'Ricerca prodotti / vetrina', url:'https://www.amazon.it/s?k=sex+toy', accetta:true, note:'Policy adult' },
